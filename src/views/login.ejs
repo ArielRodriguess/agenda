@@ -1,0 +1,81 @@
+<%- include("includes/head") %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-5">
+      <h1 class="text-center mb-3">Fazer Login ou Cadastrar-se</h1>
+      <p class="text-center lead">Faça login ou crie uma conta</p>
+
+      <div class="row my-5">
+        <div class="col-lg">
+          <h4>Fazer login</h4>
+          <p>Faça login com suas credenciais</p>
+          <form action="/login/login" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="mb-3">
+              <label for="inputEmail1" class="form-label"
+                >Endereço de email</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="inputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="inputSenha1" class="form-label"
+                >Senha</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                id="inputSenha1"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+        <div class="col-lg">
+          <h4>Faça seu cadastro</h4>
+          <p>Se você ainda não possui uma conta, cadastre-se abaixo</p>
+          <form action="/login/register" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="mb-3">
+              <label for="inputEmail2" class="form-label"
+                >Endereço de email</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="inputEmail2"
+                aria-describedby="emailHelp"
+              />
+              <div id="emailHelp" class="form-text mb-3">
+                Nunca compartilharemos seu e-mail com ninguém.
+              </div>
+              <div class="mb-3">
+              <label for="inputSenha2" class="form-label"
+                >Senha</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                id="inputSenha2"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Criar Conta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+<%- include("includes/footer") %>
