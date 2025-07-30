@@ -24,6 +24,15 @@ class Contato {
     return user
   }
 
+  async editar(id) {
+    if (typeof id !== "string") return null
+    this.valida()
+    if (this.errors.length > 0) return
+    this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, {
+      new: true,
+    })
+  }
+
   async register() {
     this.valida()
     if (this.errors.length > 0) return

@@ -18,5 +18,6 @@ router.get("/login/logout", loginController.logout)
 router.get("/contato/index", loginRequired, contatoController.index)
 router.post("/contato/register", contatoController.register)
 router.get("/contato/index/:id", contatoController.editar)
+router.post("/contato/edit/:id", contatoController.editado)
 
 module.exports = router
