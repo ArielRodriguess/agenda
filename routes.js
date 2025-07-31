@@ -16,8 +16,9 @@ router.get("/login/logout", loginController.logout)
 
 // Rotas de contato
 router.get("/contato/index", loginRequired, contatoController.index)
-router.post("/contato/register", contatoController.register)
-router.get("/contato/index/:id", contatoController.editar)
-router.post("/contato/edit/:id", contatoController.editado)
+router.post("/contato/register", loginRequired, contatoController.register)
+router.get("/contato/index/:id", loginRequired, contatoController.editar)
+router.post("/contato/edit/:id", loginRequired, contatoController.editado)
+router.get("/contato/delete/:id", loginRequired, contatoController.delete)
 
 module.exports = router

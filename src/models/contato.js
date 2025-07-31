@@ -9,7 +9,8 @@ const ContatoSchema = new mongoose.Schema({
   criadoEm: { type: Date, default: Date.now },
 })
 
-const ContatoModel = mongoose.model("Contato", ContatoSchema)
+const ContatoModel =
+  mongoose.models.Contato || mongoose.model("Contato", ContatoSchema)
 
 class Contato {
   constructor(body) {
@@ -20,8 +21,8 @@ class Contato {
 
   static async buscarPorId(id) {
     if (typeof id !== "string") return null
-    const user = await ContatoModel.findById(id)
-    return user
+    const contato = await ContatoModel.findById(id)
+    return contato
   }
 
   async editar(id) {
@@ -69,6 +70,17 @@ class Contato {
       email: this.body.email,
       telefone: this.body.telefone,
     }
+  }
+
+  static async buscaContatos() {
+    const contatos = await ContatoModel.find().sort({ criadoEm: -1 })
+    return contatos
+  }
+
+  static async delete(id) {
+    if (typeof id !== "string") return null
+    const contato = await ContatoModel.findByIdAndDelete(id)
+    return contato
   }
 }
 

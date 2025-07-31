@@ -1,4 +1,4 @@
-const Contato = require("../models/contato")
+const Contato = require("../models/Contato")
 
 exports.index = (req, res) => {
   res.render("contato", {
@@ -36,7 +36,7 @@ exports.editar = async (req, res) => {
 
     res.render("contato", { contato })
   } catch (error) {
-    console.error(error)
+    return res.render("404")
   }
 }
 
@@ -58,6 +58,23 @@ exports.editado = async (req, res) => {
     req.flash("success", "Contato editado com sucesso.")
     req.session.save(() => {
       res.redirect(`/contato/index/${contato.contato._id}`)
+    })
+    return
+  } catch (error) {
+    return res.render("404")
+  }
+}
+
+exports.delete = async (req, res) => {
+  try {
+    if (!req.params.id) return res.render("404")
+
+    const contato = await Contato.delete(req.params.id)
+    if (!contato) return res.render("404")
+
+    req.flash("success", "Contato deletato com sucesso.")
+    req.session.save(() => {
+      res.redirect("/")
     })
     return
   } catch (error) {
